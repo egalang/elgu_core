@@ -1,0 +1,28 @@
+<odoo>
+    <!-- Optional: you can keep module_category_elgu record if you want,
+         but it won't be used by res.groups in this DB build. -->
+
+    <record id="group_elgu_user" model="res.groups">
+        <field name="name">eLGU User</field>
+    </record>
+
+    <record id="group_elgu_assessor" model="res.groups">
+        <field name="name">eLGU Assessor</field>
+        <field name="implied_ids" eval="[(4, ref('elgu_core.group_elgu_user'))]"/>
+    </record>
+
+    <record id="group_elgu_approver" model="res.groups">
+        <field name="name">eLGU Approver</field>
+        <field name="implied_ids" eval="[(4, ref('elgu_core.group_elgu_assessor'))]"/>
+    </record>
+
+    <record id="group_elgu_treasury" model="res.groups">
+        <field name="name">eLGU Treasury</field>
+        <field name="implied_ids" eval="[(4, ref('elgu_core.group_elgu_user'))]"/>
+    </record>
+
+    <record id="group_elgu_admin" model="res.groups">
+        <field name="name">eLGU Administrator</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+</odoo>

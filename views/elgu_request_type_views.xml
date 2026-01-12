@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views -->
+    <record id="view_elgu_request_type_list" model="ir.ui.view">
+        <field name="name">elgu.request.type.list</field>
+        <field name="model">elgu.request.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+                <field name="requires_payment"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_elgu_request_type_form" model="ir.ui.view">
+        <field name="name">elgu.request.type.form</field>
+        <field name="model">elgu.request.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+
+                    <group string="Workflow">
+                        <field name="default_stage_id"/>
+                        <field name="stage_ids" widget="many2many_tags"/>
+                    </group>
+
+                    <group string="Requirements">
+                        <field name="requirement_ids" widget="many2many_tags"/>
+                    </group>
+
+                    <group string="Billing">
+                        <field name="requires_payment"/>
+                        <field name="fee_notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_elgu_request_type" model="ir.actions.act_window">
+        <field name="name">Request Types</field>
+        <field name="res_model">elgu.request.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_elgu_request_type_view_list" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_elgu_request_type_list"/>
+        <field name="act_window_id" ref="action_elgu_request_type"/>
+    </record>
+
+    <record id="action_elgu_request_type_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_elgu_request_type_form"/>
+        <field name="act_window_id" ref="action_elgu_request_type"/>
+    </record>
+
+</odoo>

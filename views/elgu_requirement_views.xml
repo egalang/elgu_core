@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views -->
+    <record id="view_elgu_requirement_list" model="ir.ui.view">
+        <field name="name">elgu.requirement.list</field>
+        <field name="model">elgu.requirement</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="required"/>
+                <field name="max_file_size_mb"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_elgu_requirement_form" model="ir.ui.view">
+        <field name="name">elgu.requirement.form</field>
+        <field name="model">elgu.requirement</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="sequence"/>
+                        <field name="required"/>
+                    </group>
+                    <group>
+                        <field name="allowed_file_types"/>
+                        <field name="max_file_size_mb"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_elgu_requirement" model="ir.actions.act_window">
+        <field name="name">Requirements</field>
+        <field name="res_model">elgu.requirement</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_elgu_requirement_view_list" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_elgu_requirement_list"/>
+        <field name="act_window_id" ref="action_elgu_requirement"/>
+    </record>
+
+    <record id="action_elgu_requirement_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_elgu_requirement_form"/>
+        <field name="act_window_id" ref="action_elgu_requirement"/>
+    </record>
+
+</odoo>

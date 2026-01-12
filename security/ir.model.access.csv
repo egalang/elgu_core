@@ -1,0 +1,18 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_elgu_request_user,elgu.request user,model_elgu_request,elgu_core.group_elgu_user,1,1,1,0
+access_elgu_request_assessor,elgu.request assessor,model_elgu_request,elgu_core.group_elgu_assessor,1,1,1,0
+access_elgu_request_approver,elgu.request approver,model_elgu_request,elgu_core.group_elgu_approver,1,1,1,0
+access_elgu_request_treasury,elgu.request treasury,model_elgu_request,elgu_core.group_elgu_treasury,1,1,1,0
+access_elgu_request_admin,elgu.request admin,model_elgu_request,elgu_core.group_elgu_admin,1,1,1,1
+
+access_elgu_request_type_user,elgu.request.type user,model_elgu_request_type,elgu_core.group_elgu_user,1,0,0,0
+access_elgu_request_type_admin,elgu.request.type admin,model_elgu_request_type,elgu_core.group_elgu_admin,1,1,1,1
+
+access_elgu_request_stage_user,elgu.request.stage user,model_elgu_request_stage,elgu_core.group_elgu_user,1,0,0,0
+access_elgu_request_stage_admin,elgu.request.stage admin,model_elgu_request_stage,elgu_core.group_elgu_admin,1,1,1,1
+
+access_elgu_requirement_user,elgu.requirement user,model_elgu_requirement,elgu_core.group_elgu_user,1,0,0,0
+access_elgu_requirement_admin,elgu.requirement admin,model_elgu_requirement,elgu_core.group_elgu_admin,1,1,1,1
+
+access_elgu_request_doc_user,elgu.request.document user,model_elgu_request_document,elgu_core.group_elgu_user,1,1,1,0
+access_elgu_request_doc_admin,elgu.request.document admin,model_elgu_request_document,elgu_core.group_elgu_admin,1,1,1,1

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ========================= -->
+    <!-- STAGES -->
+    <!-- ========================= -->
+    <record id="stage_draft" model="elgu.request.stage">
+        <field name="name">Draft</field>
+        <field name="sequence">10</field>
+        <field name="is_initial">True</field>
+    </record>
+
+    <record id="stage_submitted" model="elgu.request.stage">
+        <field name="name">Submitted</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stage_assessment" model="elgu.request.stage">
+        <field name="name">For Assessment</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stage_payment" model="elgu.request.stage">
+        <field name="name">For Payment</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="stage_paid" model="elgu.request.stage">
+        <field name="name">Paid</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="stage_approval" model="elgu.request.stage">
+        <field name="name">For Approval</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="stage_released" model="elgu.request.stage">
+        <field name="name">Released</field>
+        <field name="sequence">70</field>
+        <field name="is_closed">True</field>
+        <field name="fold">True</field>
+    </record>
+
+    <record id="stage_rejected" model="elgu.request.stage">
+        <field name="name">Rejected</field>
+        <field name="sequence">80</field>
+        <field name="is_closed">True</field>
+        <field name="fold">True</field>
+    </record>
+
+    <!-- reusable stage set -->
+    <!-- (just reference these in request types) -->
+
+    <!-- ========================= -->
+    <!-- REQUIREMENTS -->
+    <!-- ========================= -->
+    <record id="req_valid_id" model="elgu.requirement">
+        <field name="name">Valid Government ID</field>
+        <field name="code">VALID_ID</field>
+        <field name="sequence">10</field>
+        <field name="required">True</field>
+        <field name="allowed_file_types">pdf,jpg,jpeg,png</field>
+        <field name="max_file_size_mb">10</field>
+    </record>
+
+    <record id="req_barangay_clearance" model="elgu.requirement">
+        <field name="name">Barangay Clearance</field>
+        <field name="code">BRGY_CLR</field>
+        <field name="sequence">20</field>
+        <field name="required">True</field>
+    </record>
+
+    <record id="req_dti_sec" model="elgu.requirement">
+        <field name="name">DTI / SEC Registration</field>
+        <field name="code">DTI_SEC</field>
+        <field name="sequence">30</field>
+        <field name="required">True</field>
+    </record>
+
+    <record id="req_lease" model="elgu.requirement">
+        <field name="name">Lease Contract / Proof of Address</field>
+        <field name="code">LEASE</field>
+        <field name="sequence">40</field>
+        <field name="required">True</field>
+    </record>
+
+    <record id="req_building_plans" model="elgu.requirement">
+        <field name="name">Building Plans (Signed and Sealed)</field>
+        <field name="code">BLDG_PLANS</field>
+        <field name="sequence">50</field>
+        <field name="required">True</field>
+    </record>
+
+    <record id="req_tax_declaration" model="elgu.requirement">
+        <field name="name">Tax Declaration / Property Details</field>
+        <field name="code">TAX_DEC</field>
+        <field name="sequence">60</field>
+        <field name="required">True</field>
+    </record>
+
+    <record id="req_affidavit_relationship" model="elgu.requirement">
+        <field name="name">Affidavit / Proof of Relationship (if applicable)</field>
+        <field name="code">AFF_REL</field>
+        <field name="sequence">70</field>
+        <field name="required">False</field>
+    </record>
+
+    <!-- ========================= -->
+    <!-- REQUEST TYPES (QC-aligned set) -->
+    <!-- ========================= -->
+
+    <!-- helper: allowed stages -->
+    <!-- You can reuse the same stage list for all types now -->
+    <record id="type_business_permit_new" model="elgu.request.type">
+        <field name="name">Business Permit - New</field>
+        <field name="code">BP_NEW</field>
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="requires_payment">True</field>
+        <field name="default_stage_id" ref="stage_draft"/>
+        <field name="stage_ids" eval="[(6,0,[
+            ref('elgu_core.stage_draft'),
+            ref('elgu_core.stage_submitted'),
+            ref('elgu_core.stage_assessment'),
+            ref('elgu_core.stage_payment'),
+            ref('elgu_core.stage_paid'),
+            ref('elgu_core.stage_approval'),
+            ref('elgu_core.stage_released'),
+            ref('elgu_core.stage_rejected')
+        ])]"/>
+        <field name="requirement_ids" eval="[(6,0,[
+            ref('elgu_core.req_valid_id'),
+            ref('elgu_core.req_barangay_clearance'),
+            ref('elgu_core.req_dti_sec'),
+            ref('elgu_core.req_lease')
+        ])]"/>
+        <field name="fee_notes">Fees depend on business type, size, and LGU assessment rules.</field>
+    </record>
+
+    <record id="type_business_permit_renew" model="elgu.request.type">
+        <field name="name">Business Permit - Renewal</field>
+        <field name="code">BP_RENEW</field>
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="requires_payment">True</field>
+        <field name="default_stage_id" ref="stage_draft"/>
+        <field name="stage_ids" eval="[(6,0,[
+            ref('elgu_core.stage_draft'),
+            ref('elgu_core.stage_submitted'),
+            ref('elgu_core.stage_assessment'),
+            ref('elgu_core.stage_payment'),
+            ref('elgu_core.stage_paid'),
+            ref('elgu_core.stage_approval'),
+            ref('elgu_core.stage_released'),
+            ref('elgu_core.stage_rejected')
+        ])]"/>
+        <field name="requirement_ids" eval="[(6,0,[
+            ref('elgu_core.req_valid_id'),
+            ref('elgu_core.req_barangay_clearance')
+        ])]"/>
+        <field name="fee_notes">Renewal assessment may include penalties if late.</field>
+    </record>
+
+    <record id="type_building_permit" model="elgu.request.type">
+        <field name="name">Building Permit</field>
+        <field name="code">BLDG</field>
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="requires_payment">True</field>
+        <field name="default_stage_id" ref="stage_draft"/>
+        <field name="stage_ids" eval="[(6,0,[
+            ref('elgu_core.stage_draft'),
+            ref('elgu_core.stage_submitted'),
+            ref('elgu_core.stage_assessment'),
+            ref('elgu_core.stage_payment'),
+            ref('elgu_core.stage_paid'),
+            ref('elgu_core.stage_approval'),
+            ref('elgu_core.stage_released'),
+            ref('elgu_core.stage_rejected')
+        ])]"/>
+        <field name="requirement_ids" eval="[(6,0,[
+            ref('elgu_core.req_valid_id'),
+            ref('elgu_core.req_building_plans'),
+            ref('elgu_core.req_lease')
+        ])]"/>
+        <field name="fee_notes">Includes engineering review and ancillary clearances.</field>
+    </record>
+
+    <record id="type_rpt_payment" model="elgu.request.type">
+        <field name="name">Real Property Tax (RPT) Payment</field>
+        <field name="code">RPT</field>
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="requires_payment">True</field>
+        <field name="default_stage_id" ref="stage_draft"/>
+        <field name="stage_ids" eval="[(6,0,[
+            ref('elgu_core.stage_draft'),
+            ref('elgu_core.stage_submitted'),
+            ref('elgu_core.stage_payment'),
+            ref('elgu_core.stage_paid'),
+            ref('elgu_core.stage_released'),
+            ref('elgu_core.stage_rejected')
+        ])]"/>
+        <field name="requirement_ids" eval="[(6,0,[
+            ref('elgu_core.req_valid_id'),
+            ref('elgu_core.req_tax_declaration')
+        ])]"/>
+        <field name="fee_notes">Amount based on property ledger dues, penalties, and discounts.</field>
+    </record>
+
+    <record id="type_cedula" model="elgu.request.type">
+        <field name="name">Community Tax Certificate (Cedula)</field>
+        <field name="code">CEDULA</field>
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="requires_payment">True</field>
+        <field name="default_stage_id" ref="stage_draft"/>
+        <field name="stage_ids" eval="[(6,0,[
+            ref('elgu_core.stage_draft'),
+            ref('elgu_core.stage_submitted'),
+            ref('elgu_core.stage_payment'),
+            ref('elgu_core.stage_paid'),
+            ref('elgu_core.stage_released'),
+            ref('elgu_core.stage_rejected')
+        ])]"/>
+        <field name="requirement_ids" eval="[(6,0,[
+            ref('elgu_core.req_valid_id')
+        ])]"/>
+        <field name="fee_notes">Computed based on declared income and LGU rules.</field>
+    </record>
+
+    <record id="type_birth_cert" model="elgu.request.type">
+        <field name="name">Civil Registry - Birth Certificate</field>
+        <field name="code">CR_BIRTH</field>
+        <field name="sequence">60</field>
+        <field name="active">True</field>
+        <field name="requires_payment">True</field>
+        <field name="default_stage_id" ref="stage_draft"/>
+        <field name="stage_ids" eval="[(6,0,[
+            ref('elgu_core.stage_draft'),
+            ref('elgu_core.stage_submitted'),
+            ref('elgu_core.stage_assessment'),
+            ref('elgu_core.stage_payment'),
+            ref('elgu_core.stage_paid'),
+            ref('elgu_core.stage_released'),
+            ref('elgu_core.stage_rejected')
+        ])]"/>
+        <field name="requirement_ids" eval="[(6,0,[
+            ref('elgu_core.req_valid_id'),
+            ref('elgu_core.req_affidavit_relationship')
+        ])]"/>
+    </record>
+
+    <record id="type_death_cert" model="elgu.request.type">
+        <field name="name">Civil Registry - Death Certificate</field>
+        <field name="code">CR_DEATH</field>
+        <field name="sequence">70</field>
+        <field name="active">True</field>
+        <field name="requires_payment">True</field>
+        <field name="default_stage_id" ref="stage_draft"/>
+        <field name="stage_ids" eval="[(6,0,[
+            ref('elgu_core.stage_draft'),
+            ref('elgu_core.stage_submitted'),
+            ref('elgu_core.stage_assessment'),
+            ref('elgu_core.stage_payment'),
+            ref('elgu_core.stage_paid'),
+            ref('elgu_core.stage_released'),
+            ref('elgu_core.stage_rejected')
+        ])]"/>
+        <field name="requirement_ids" eval="[(6,0,[
+            ref('elgu_core.req_valid_id'),
+            ref('elgu_core.req_affidavit_relationship')
+        ])]"/>
+    </record>
+
+    <record id="type_marriage_cert" model="elgu.request.type">
+        <field name="name">Civil Registry - Marriage Certificate</field>
+        <field name="code">CR_MARRIAGE</field>
+        <field name="sequence">80</field>
+        <field name="active">True</field>
+        <field name="requires_payment">True</field>
+        <field name="default_stage_id" ref="stage_draft"/>
+        <field name="stage_ids" eval="[(6,0,[
+            ref('elgu_core.stage_draft'),
+            ref('elgu_core.stage_submitted'),
+            ref('elgu_core.stage_assessment'),
+            ref('elgu_core.stage_payment'),
+            ref('elgu_core.stage_paid'),
+            ref('elgu_core.stage_released'),
+            ref('elgu_core.stage_rejected')
+        ])]"/>
+        <field name="requirement_ids" eval="[(6,0,[
+            ref('elgu_core.req_valid_id'),
+            ref('elgu_core.req_affidavit_relationship')
+        ])]"/>
+    </record>
+
+</odoo>

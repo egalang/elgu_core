@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Citizens -->
+    <record id="partner_juan" model="res.partner">
+        <field name="name">Juan Dela Cruz</field>
+        <field name="email">juan.delacruz@example.com</field>
+        <field name="phone">09171234567</field>
+        <field name="street">12 Maginhawa St.</field>
+        <field name="city">Quezon City</field>
+        <field name="country_id" ref="base.ph"/>
+        <field name="is_company">False</field>
+    </record>
+
+    <record id="partner_maria" model="res.partner">
+        <field name="name">Maria Santos</field>
+        <field name="email">maria.santos@example.com</field>
+        <field name="phone">09181239876</field>
+        <field name="street">45 Commonwealth Ave.</field>
+        <field name="city">Quezon City</field>
+        <field name="country_id" ref="base.ph"/>
+        <field name="is_company">False</field>
+    </record>
+
+    <record id="partner_roberto" model="res.partner">
+        <field name="name">Roberto Reyes</field>
+        <field name="email">roberto.reyes@example.com</field>
+        <field name="phone">09221234567</field>
+        <field name="street">88 Katipunan Ave.</field>
+        <field name="city">Quezon City</field>
+        <field name="country_id" ref="base.ph"/>
+        <field name="is_company">False</field>
+    </record>
+
+    <!-- Businesses -->
+    <record id="partner_kapetambay" model="res.partner">
+        <field name="name">Kape Tambay Cafe</field>
+        <field name="email">hello@kapetambay.ph</field>
+        <field name="phone">0281234567</field>
+        <field name="street">Unit 3, 77 Maginhawa St.</field>
+        <field name="city">Quezon City</field>
+        <field name="country_id" ref="base.ph"/>
+        <field name="is_company">True</field>
+    </record>
+
+    <record id="partner_bayanitech" model="res.partner">
+        <field name="name">BayaniTech Solutions</field>
+        <field name="email">info@bayanitech.ph</field>
+        <field name="phone">0276543210</field>
+        <field name="street">10F Tech Hub, Eastwood</field>
+        <field name="city">Quezon City</field>
+        <field name="country_id" ref="base.ph"/>
+        <field name="is_company">True</field>
+    </record>
+
+</odoo>
