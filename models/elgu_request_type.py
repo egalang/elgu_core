@@ -21,3 +21,4 @@ class ElguRequestType(models.Model):
     # Billing configuration placeholders (we’ll expand later)
     requires_payment = fields.Boolean(default=True)
     fee_notes = fields.Text(string="Fee Notes / Policy Reference")
+    fee_amount = fields.Float(string="Fee Amount")

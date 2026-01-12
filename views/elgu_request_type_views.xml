@@ -40,6 +40,7 @@
 
                     <group string="Billing">
                         <field name="requires_payment"/>
+                        <field name="fee_amount"/>
                         <field name="fee_notes"/>
                     </group>
                 </sheet>
